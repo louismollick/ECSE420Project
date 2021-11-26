@@ -142,6 +142,9 @@ int main(int argc, char *argv[])
 
     printf("pthreads.c (%d x %d matrix, %d threads) - Runtime: %llu\n", matrix_size, matrix_size, num_threads, end - start);
     
+    // printf("RESULT:\n");
+    // printMatrix(matrix_c);
+
     free(child_threads);
     free(work_ranges);
     for (int i = 0; i < matrix_size; i++)
@@ -153,9 +156,6 @@ int main(int argc, char *argv[])
     free(matrix_a);
     free(matrix_b);
     free(matrix_c);
-
-    // printf("RESULT:\n");
-    // printMatrix(matrix_c);
 
     return 0;
 }
