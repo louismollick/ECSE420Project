@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
     multiply();
     uint64_t end = get_current_time();
 
-    // printHeadMatrix(matrix_c);
+    printHeadMatrix(matrix_c);
 
     printf("simd_sse.c (%d x %d matrix) - Runtime: %llu\n", matrix_size, matrix_size, end - start);
 
