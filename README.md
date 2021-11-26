@@ -21,7 +21,7 @@ Are the current solutions for parallelization of programs compiled to WebAssembl
     - NOTE: If you'd like to use more than 5 threads, you'll need to set the PTHREAD_POOL_SIZE argument higher in `compile.sh`.
 
 ## Problems/Questions observed
-- Running the pthreads.c program in WebAssembly with a high matrix size (~2000) returns an incorrect value:
+- Running either program (sequential.c or pthreads.c) in WebAssembly with a high matrix size (~2000) returns the same incorrect value:
 ```
 ➜  ECSE420Project git:(main) ✗ ./out/native/pthreads.o 2000 4
 2664667000 2662668000 2660669000 2658670000 2656671000 2654672000 2652673000 2650674000 2648675000 2646676000 ...
@@ -31,7 +31,7 @@ Opening in existing browser session.
 -1630300296 -1632299296 -1634298296 -1636297296 -1638296296 -1640295296 -1642294296 -1644293296 -1646292296 -1648291296 ...
 pthreads.c (2000 x 2000 matrix, 4 threads) - Runtime: 12081000
 ```
-    - This could be due to some compiler optimization that's breaking the code -- might be possible to fix with some flag
+- This could be due to some compiler optimization that's breaking the code -- might be possible to fix with some flag
 
 #### Resources
 
