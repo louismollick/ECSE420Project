@@ -10,8 +10,8 @@ mkdir -p out/web/pthreads
 rm -f out/*.o
 
 # Compile to native executable
-gcc c/sequential.c -o ./out/native/sequential.o
-gcc c/pthreads.c -o ./out/native/pthreads.o
+clang -O3 c/sequential.c -o ./out/native/sequential.o
+clang -O3 c/pthreads.c -o ./out/native/pthreads.o
 
 # Compile to wasm
 emcc --emrun -s ALLOW_MEMORY_GROWTH=1 c/sequential.c -s WASM=1 -o out/web/sequential/index.html
