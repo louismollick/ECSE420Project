@@ -13,7 +13,7 @@ Are the current solutions for parallelization of programs compiled to WebAssembl
     - WebAssembly (.wasm) with HTML/Javascript drivers in `out/web`
     - OPTIONALLY: you can use `./compile_docker.sh` which does the same thing, but compiles it inside of a Docker container. This is the best option if you're having issues compiling with your installed emscripten ; but it won't help with `./runwasm.sh` (so you still need to install emscripten locally)
 
-3. Run C executables like normal: `./out/native/sequential 1000`
+3. Run C executables like normal: `./out/native/sequential.o 1000`
 
 4. Run WebAssembly program using: `./runwasm.sh <program_name> <arguments>`
     - For example `./runwasm.sh sequential 1000`
