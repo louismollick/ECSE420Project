@@ -37,16 +37,15 @@ void multiply()
     for (int i = 0; i < matrix_size; ++i)
     {
         for (int j = 0; j < matrix_size; j += 4)
-        { // vectorize over this loop
-            __m128i vR = _mm_setzero_si128();
+        {
+            __m128i vR = _mm_setzero_si128(); // Init 4 element vector with 0s
             for (int k = 0; k < matrix_size; k++)
-            { // not this loop
-                //result[i][j] += mat1[i][k] * mat2[k][j];
-                __m128i vA = _mm_set1_epi32(matrix_a[i][k]);              // load+broadcast is much cheaper than MOVD + 3 inserts (or especially 4x insert, which your new code is doing)
-                __m128i vB = _mm_loadu_si128((__m128i *)&matrix_b[k][j]); // mat2[k][j+0..3]
-                vR = _mm_add_epi32(vR, _mm_mullo_epi32(vA, vB));
+            {
+                __m128i vA = _mm_set1_epi32(matrix_a[i][k]);              // Load matrix_a[i][k] into all 4 elements of vA
+                __m128i vB = _mm_loadu_si128((__m128i *)&matrix_b[k][j]); // Load 4 elements matrix_b[k][j+0..3] into vB
+                vR = _mm_add_epi32(vR, _mm_mullo_epi32(vA, vB));          // vR += vR + vA * vB for all 4 vector elements in parallel
             }
-        _mm_storeu_si128((__m128i*)&matrix_c[i][j], vR);
+            _mm_storeu_si128((__m128i *)&matrix_c[i][j], vR); // Store 4 vector element in memory positions matrix_c[i][j+0..3]
         }
     }
 }
